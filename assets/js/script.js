@@ -254,5 +254,28 @@ var deleteTask = function(taskId){
 var saveTasks = function() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
+
+var loadTasks = function(){
+    // Get task items from `localStorage`
+    var savedTasks = localStorage.getItem("tasks");
+    console.log(saveTasks)
+
+    if (saveTasks === null) {
+        return false;
+    }    
+
+    // Convert tasks from the string format back into an array of objects.
+    saveTasks = JSON.parse(savedTasks);
+    console.log(tasks);
+    // Iterate through a tasks array and creates task elements on the page from it.
+    for (var i = 0; i < savedTasks.length; i++){
+        // pass each task object into the `createTaskEl()` function
+        console.log(saveTasks[i])
+        createTaskEl(saveTasks[i])
+    }
+
+}
+
 pageContentEl.addEventListener("click", taskButtonHandler);
 pageContentEl.addEventListener("change", taskStatusChangeHandler);
+loadTasks()
